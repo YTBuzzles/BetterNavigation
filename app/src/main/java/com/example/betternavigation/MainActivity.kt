@@ -27,6 +27,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 private const val DEBUG_TAG = "Gestures"
 
+
 class MainActivity : AppCompatActivity() {
 
 
