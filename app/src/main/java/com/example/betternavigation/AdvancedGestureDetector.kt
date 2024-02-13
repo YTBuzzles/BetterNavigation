@@ -17,34 +17,34 @@ class AdvancedGestureDetector(context: Context, view: View, listener: GestureLis
     init {
         gestureDetectorCompat =
             GestureDetectorCompat(context, object : GestureDetector.SimpleOnGestureListener() {
-                fun onDown(e: MotionEvent?): Boolean {
+                override fun onDown(e: MotionEvent): Boolean {
                     return listener.onDown(e) // Allow handling down event within listener
                 }
 
-                fun onSingleTapUp(e: MotionEvent?): Boolean {
+                override fun onSingleTapUp(e: MotionEvent): Boolean {
                     return listener.onSingleTapUp(e)
                 }
 
-                fun onDoubleTap(e: MotionEvent?): Boolean {
+                override fun onDoubleTap(e: MotionEvent): Boolean {
                     return listener.onDoubleTap(e)
                 }
 
-                fun onLongPress(e: MotionEvent?) {
+                override fun onLongPress(e: MotionEvent) {
                     listener.onLongPress(e)
                 }
 
-                fun onFling(
-                    e1: MotionEvent?,
-                    e2: MotionEvent?,
+                override fun onFling(
+                    e1: MotionEvent,
+                    e2: MotionEvent,
                     velocityX: Float,
                     velocityY: Float
                 ): Boolean {
                     return listener.onFling(e1, e2, velocityX, velocityY)
                 }
 
-                fun onScroll(
-                    e1: MotionEvent?,
-                    e2: MotionEvent?,
+                override fun onScroll(
+                    e1: MotionEvent,
+                    e2: MotionEvent,
                     distanceX: Float,
                     distanceY: Float
                 ): Boolean {
