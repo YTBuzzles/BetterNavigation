@@ -1,18 +1,19 @@
 package com.example.betternavigation
 
-
+import android.content.Context
+import android.view.GestureDetector
+import android.view.MotionEvent
+import android.view.View
+import androidx.core.view.GestureDetectorCompat
 import android.accessibilityservice.AccessibilityService
 import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
-import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.text.TextUtils
 import android.util.Log
-import android.view.GestureDetector
-import android.view.MotionEvent
 import android.view.accessibility.AccessibilityEvent
 import android.widget.Button
 import androidx.annotation.RequiresApi
@@ -25,19 +26,21 @@ import androidx.appcompat.app.AppCompatActivity
 
 
 private const val DEBUG_TAG = "Gestures"
-class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener {
-    private gestureDetector GestureDetector;
+
+class MainActivity : AppCompatActivity() {
+
 
     @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val gestureListener: MyGestureListener
         setContentView(R.layout.content_main)
         val recents = findViewById<Button>(R.id.recents)
         val recentsAppButton = findViewById<Button>(R.id.recentsAppButton)
         val accessibilityNav = MyAccessibilityService()
         val requestStatus = findViewById<Button>(R.id.requestStatus)
-        val gestureDetector = GestureDetector(this , this)
 
 
         val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
@@ -79,37 +82,6 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener {
 
     }
 
-    override fun onTouchEvent(event: MotionEvent): Boolean {
-        gestureDetector.onTouchEvent(event)
-        Log.d("myTag", "This is my message");
-
-
-        return super.onTouchEvent(event)
-    }
-
-    override fun onDown(p0: MotionEvent): Boolean {
-
-        return false
-    }
-
-    override fun onShowPress(p0: MotionEvent) {
-    }
-
-    override fun onSingleTapUp(p0: MotionEvent): Boolean {
-        return false
-    }
-
-    override fun onScroll(p0: MotionEvent, p1: MotionEvent, p2: Float, p3: Float): Boolean {
-        return false
-    }
-
-    override fun onLongPress(p0: MotionEvent) {
-    }
-
-    override fun onFling(p0: MotionEvent, p1: MotionEvent, p2: Float, p3: Float): Boolean {
-        return false
-    }
-}
 
 class MyAccessibilityService : AccessibilityService() {
     override fun onInterrupt() {}
@@ -131,10 +103,10 @@ class MyAccessibilityService : AccessibilityService() {
     @RequiresApi(value = 30)
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
     }
-
     fun isAccessibilityServiceEnabled(mContext: Context): Boolean {
         var accessibilityEnabled = 0
-        val service: String = mContext.packageName + "/" + MyAccessibilityService::class.java.canonicalName
+        val service: String =
+            mContext.packageName + "/" + MyAccessibilityService::class.java.canonicalName
         try {
             accessibilityEnabled = Settings.Secure.getInt(
                 mContext.applicationContext.contentResolver,
@@ -165,6 +137,7 @@ class MyAccessibilityService : AccessibilityService() {
         }
         return false
     }
+}
 }
 
 
