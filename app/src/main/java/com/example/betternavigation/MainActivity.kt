@@ -24,38 +24,44 @@ import androidx.appcompat.app.AppCompatActivity
 // try to find a way to not do it in onCreate I guess? https://stackoverflow.com/questions/39532507/attempt-to-invoke-virtual-method-java-lang-object-android-content-context-getsy
 // this website is where that thought came from
 
+//I got it working i think just need to add debugging to test it
+//can u show me how to use the Log thing i havent worked it out
+
 
 private const val DEBUG_TAG = "Gestures"
 
 
 class MainActivity : AppCompatActivity() {
 
-
+    //Main Program/App Start
     @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val gestureListener: MyGestureListener
         setContentView(R.layout.content_main)
         val recents = findViewById<Button>(R.id.recents)
         val recentsAppButton = findViewById<Button>(R.id.recentsAppButton)
         val accessibilityNav = MyAccessibilityService()
         val requestStatus = findViewById<Button>(R.id.requestStatus)
+        val navigation = findViewById<Button>(R.id.navigation)
 
-
+        //The listerner for the button: ID = navigation
+        var navGestureDetector = AdvancedGestureDetector(this, navigation, MyGestureListener())
         val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
         startActivity(intent)
+
+
+        navigation.setOnClickListener { navGestureDetector }
+
 
         requestStatus.setOnClickListener {
             if (accessibilityNav.isAccessibilityServiceEnabled(applicationContext)) {
                 requestStatus.text = "enabled"
-            }
-            else {
+            } else {
                 requestStatus.text = "disabled"
             }
         }
-
         recentsAppButton.setOnClickListener {
             try {
                 val Recentapps = Intent("com.sec.android.app.launcher")
