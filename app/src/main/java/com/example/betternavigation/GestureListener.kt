@@ -4,7 +4,7 @@ import android.util.Log
 import android.view.MotionEvent
 
 
-class MyGestureListener : AdvancedGestureDetector.GestureListener {
+class GestureListener : AdvancedGestureDetector.GestureListener {
         override fun onSingleTapUp(event: MotionEvent?): Boolean {
                 // Perform an action on single tap, e.g., show a menu
                 //Toast.makeText(context, "Single tap detected!", Toast.LENGTH_SHORT).show()

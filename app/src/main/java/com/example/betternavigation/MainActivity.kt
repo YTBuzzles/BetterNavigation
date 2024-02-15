@@ -1,10 +1,6 @@
 package com.example.betternavigation
 
 import android.content.Context
-import android.view.GestureDetector
-import android.view.MotionEvent
-import android.view.View
-import androidx.core.view.GestureDetectorCompat
 import android.accessibilityservice.AccessibilityService
 import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
@@ -14,6 +10,7 @@ import android.os.Bundle
 import android.provider.Settings
 import android.text.TextUtils
 import android.util.Log
+import android.view.MotionEvent
 import android.view.accessibility.AccessibilityEvent
 import android.widget.Button
 import androidx.annotation.RequiresApi
@@ -42,111 +39,145 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.content_main)
         val recents = findViewById<Button>(R.id.recents)
         val recentsAppButton = findViewById<Button>(R.id.recentsAppButton)
-        val accessibilityNav = MyAccessibilityService()
+//        val accessibilityNav = MyAccessibilityService()
         val requestStatus = findViewById<Button>(R.id.requestStatus)
         val navigation = findViewById<Button>(R.id.navigation)
 
         //The listerner for the button: ID = navigation
-        var navGestureDetector = AdvancedGestureDetector(this, navigation, MyGestureListener())
-        val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
-        startActivity(intent)
+        //var navGestureDetector = AdvancedGestureDetector(this, navigation, GestureListener())
+
+//        val accessibilityIntent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
+//        startActivity(accessibilityIntent)
 
 
-        navigation.setOnClickListener { navGestureDetector }
+        navigation.setOnClickListener {
+            Log.d(TAG, "Navigation")
+        }
 
+        fun onTouchEvent(event: MotionEvent): Boolean {
+            return when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    Log.d(DEBUG_TAG, "Action was DOWN")
+                    true
+                }
 
-        requestStatus.setOnClickListener {
-            if (accessibilityNav.isAccessibilityServiceEnabled(applicationContext)) {
-                requestStatus.text = "enabled"
-            } else {
-                requestStatus.text = "disabled"
+                MotionEvent.ACTION_MOVE -> {
+                    Log.d(DEBUG_TAG, "Action was MOVE")
+                    true
+                }
+
+                MotionEvent.ACTION_UP -> {
+                    Log.d(DEBUG_TAG, "Action was UP")
+                    true
+                }
+
+                MotionEvent.ACTION_CANCEL -> {
+                    Log.d(DEBUG_TAG, "Action was CANCEL")
+                    true
+                }
+
+                MotionEvent.ACTION_OUTSIDE -> {
+                    Log.d(DEBUG_TAG, "Movement occurred outside bounds of current screen element")
+                    true
+                }
+
+                else -> super.onTouchEvent(event)
             }
         }
+
+
+//        requestStatus.setOnClickListener {
+//                if (accessibilityNav.isAccessibilityServiceEnabled(applicationContext)) {
+//                    requestStatus.text = "enabled"
+//                } else {
+//                    requestStatus.text = "disabled"
+//                }
+//            }
         recentsAppButton.setOnClickListener {
-            try {
-                val Recentapps = Intent("com.sec.android.app.launcher")
-                startActivity(Recentapps)
+            val Recentapps = Intent(Intent.ACTION_MAIN).apply {
+                addCategory(Intent.CATEGORY_HOME)
             }
-            catch ( RuntimeException: NullPointerException)
-            { RuntimeException}
+            startActivity(Recentapps)
 
 
-
-        }
-        recents.setOnClickListener {
+            recents.setOnClickListener {
 //            accessibilityNav.perfAction(3)
 
 
-            val recentsIntent = Intent(Intent.ACTION_MAIN).apply {
-                addCategory(Intent.CATEGORY_HOME)
-            }
-
-            startActivity(recentsIntent)
-
-
-        }
-
-
-    }
-
-
-class MyAccessibilityService : AccessibilityService() {
-    override fun onInterrupt() {}
-
-    @RequiresApi(Build.VERSION_CODES.R)
-    override fun onServiceConnected() {
-        super.onServiceConnected()
-        var sysAcns = systemActions
-        Log.d(TAG, "onServiceConnected:")
-
-    }
-
-    @RequiresApi(Build.VERSION_CODES.R)
-    fun perfAction() {
-        var sysAcns = systemActions
-        performGlobalAction(3)
-    }
-
-    @RequiresApi(value = 30)
-    override fun onAccessibilityEvent(event: AccessibilityEvent?) {
-    }
-    fun isAccessibilityServiceEnabled(mContext: Context): Boolean {
-        var accessibilityEnabled = 0
-        val service: String =
-            mContext.packageName + "/" + MyAccessibilityService::class.java.canonicalName
-        try {
-            accessibilityEnabled = Settings.Secure.getInt(
-                mContext.applicationContext.contentResolver,
-                Settings.Secure.ACCESSIBILITY_ENABLED
-            )
-            Log.v(TAG, "accessibilityEnabled = $accessibilityEnabled")
-        } catch (e: Settings.SettingNotFoundException) {
-            Log.e(TAG, "Error finding setting, default accessibility to not found: " + e.message)
-        }
-        val mStringColonSplitter = TextUtils.SimpleStringSplitter(':')
-        if (accessibilityEnabled == 1) {
-            Log.v(TAG, "Accessibility Is Enabled")
-            val settingValue: String = Settings.Secure.getString(
-                mContext.applicationContext.contentResolver,
-                Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES
-            )
-            mStringColonSplitter.setString(settingValue)
-            while (mStringColonSplitter.hasNext()) {
-                val accessibilityService = mStringColonSplitter.next()
-                Log.v(TAG, "AccessibilityService :: $accessibilityService $service")
-                if (accessibilityService.equals(service, ignoreCase = true)) {
-                    Log.v(TAG, "accessibility is switched on!")
-                    return true
+                val recentsIntent = Intent(Intent.ACTION_MAIN).apply {
+                    addCategory(Intent.CATEGORY_HOME)
                 }
-            }
-        } else {
-            Log.v(TAG, "accessibility is disabled")
-        }
-        return false
-    }
-}
-}
 
+                startActivity(recentsIntent)
+
+
+            }
+
+
+        }
+    }
+
+
+//        class MyAccessibilityService : AccessibilityService() {
+//            override fun onInterrupt() {}
+//
+//            @RequiresApi(Build.VERSION_CODES.R)
+//            override fun onServiceConnected() {
+//                super.onServiceConnected()
+//                var sysAcns = systemActions
+//                Log.d(TAG, "onServiceConnected:")
+//
+//            }
+
+//            @RequiresApi(Build.VERSION_CODES.R)
+//            fun perfAction() {
+//                var sysAcns = systemActions
+//                performGlobalAction(3)
+//            }
+//
+//            @RequiresApi(value = 30)
+//            override fun onAccessibilityEvent(event: AccessibilityEvent?) {
+//            }
+//
+//            fun isAccessibilityServiceEnabled(mContext: Context): Boolean {
+//                var accessibilityEnabled = 0
+//                val service: String =
+//                    mContext.packageName + "/" + MyAccessibilityService::class.java.canonicalName
+//                try {
+//                    accessibilityEnabled = Settings.Secure.getInt(
+//                        mContext.applicationContext.contentResolver,
+//                        Settings.Secure.ACCESSIBILITY_ENABLED
+//                    )
+//                    Log.v(TAG, "accessibilityEnabled = $accessibilityEnabled")
+//                } catch (e: Settings.SettingNotFoundException) {
+//                    Log.e(
+//                        TAG,
+//                        "Error finding setting, default accessibility to not found: " + e.message
+//                    )
+//                }
+//                val mStringColonSplitter = TextUtils.SimpleStringSplitter(':')
+//                if (accessibilityEnabled == 1) {
+//                    Log.v(TAG, "Accessibility Is Enabled")
+//                    val settingValue: String = Settings.Secure.getString(
+//                        mContext.applicationContext.contentResolver,
+//                        Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES
+//                    )
+//                    mStringColonSplitter.setString(settingValue)
+//                    while (mStringColonSplitter.hasNext()) {
+//                        val accessibilityService = mStringColonSplitter.next()
+//                        Log.v(TAG, "AccessibilityService :: $accessibilityService $service")
+//                        if (accessibilityService.equals(service, ignoreCase = true)) {
+//                            Log.v(TAG, "accessibility is switched on!")
+//                            return true
+//                        }
+//                    }
+//                } else {
+//                    Log.v(TAG, "accessibility is disabled")
+//                }
+//                return false
+//            }
+//        }
+}
 
 
 
