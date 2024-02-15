@@ -2,6 +2,7 @@ package com.example.betternavigation
 
 
 import android.content.Context
+import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
@@ -12,24 +13,33 @@ class AdvancedGestureDetector(context: Context, view: View, listener: GestureLis
 
     private val gestureDetectorCompat: GestureDetectorCompat
     private val view: View
-    private val listener: GestureListener
+    val listener: GestureListener
 
     init {
         gestureDetectorCompat =
             GestureDetectorCompat(context, object : GestureDetector.SimpleOnGestureListener() {
                 override fun onDown(e: MotionEvent): Boolean {
+                    Log.d("Gesture", "Down!")
                     return listener.onDown(e) // Allow handling down event within listener
                 }
 
+//                override fun onUp(e: MotionEvent): Boolean {
+//                    Log.d("Gesture", "Down!")
+//                    return listener.onDown(e) // Allow handling down event within listener
+//                }
+
                 override fun onSingleTapUp(e: MotionEvent): Boolean {
+                    Log.d("Gesture", "Tap!")
                     return listener.onSingleTapUp(e)
                 }
 
                 override fun onDoubleTap(e: MotionEvent): Boolean {
+                    Log.d("Gesture", "DoubleTap!")
                     return listener.onDoubleTap(e)
                 }
 
                 override fun onLongPress(e: MotionEvent) {
+                    Log.d("Gesture", "LongPress!")
                     listener.onLongPress(e)
                 }
 
@@ -40,6 +50,7 @@ class AdvancedGestureDetector(context: Context, view: View, listener: GestureLis
                     velocityY: Float
                 ): Boolean {
                     return listener.onFling(e1, e2, velocityX, velocityY)
+                    Log.d("Gesture", "Fling!")
                 }
 
                 override fun onScroll(
@@ -49,6 +60,7 @@ class AdvancedGestureDetector(context: Context, view: View, listener: GestureLis
                     distanceY: Float
                 ): Boolean {
                     return listener.onScroll(e1, e2, distanceX, distanceY)
+                    Log.d("Gesture", "Scroll!")
                 }
 
                 // Add other gesture methods as needed (e.g., onShowPress, onSwipe)
@@ -64,6 +76,10 @@ class AdvancedGestureDetector(context: Context, view: View, listener: GestureLis
 
     interface GestureListener {
         fun onDown(event: MotionEvent?): Boolean {
+            return false
+        }
+
+        fun onUp(event: MotionEvent?): Boolean {
             return false
         }
 

@@ -3,6 +3,7 @@ package com.example.betternavigation
 import android.content.Context
 import android.accessibilityservice.AccessibilityService
 import android.annotation.SuppressLint
+import android.app.usage.UsageEvents.Event
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Build
@@ -15,6 +16,7 @@ import android.view.accessibility.AccessibilityEvent
 import android.widget.Button
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.coroutines.selects.select
 
 
 // Problem with crashing seems to be todo with calling the functions from the wrong spot or time
@@ -44,15 +46,21 @@ class MainActivity : AppCompatActivity() {
         val navigation = findViewById<Button>(R.id.navigation)
 
         //The listerner for the button: ID = navigation
-        //var navGestureDetector = AdvancedGestureDetector(this, navigation, GestureListener())
+        var navGestureDetector = AdvancedGestureDetector(this, navigation, GestureListener())
 
 //        val accessibilityIntent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
 //        startActivity(accessibilityIntent)
 
 
-        navigation.setOnClickListener {
-            Log.d(TAG, "Navigation")
-        }
+//        navigation.setOnClickListener {
+//            Log.d(TAG, "Navigation")
+//        }
+//        navigation.setOnTouchListener{
+//            var navGestureDetector.listener.onDown(event: MotionEvent)
+//            }
+//
+//        navigation.set
+
 
         fun onTouchEvent(event: MotionEvent): Boolean {
             return when (event.action) {
