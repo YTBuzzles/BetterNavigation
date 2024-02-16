@@ -9,13 +9,14 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.GestureDetectorCompat
+import java.lang.NullPointerException
 
 
 class AdvancedGestureDetector(context: Context, view: View, listener: GestureListener) {
 
     private val gestureDetectorCompat: GestureDetectorCompat
     private val view: View
-    private lateinit var action: String
+    private var action: String = Intent.ACTION_MAIN
     val listener: GestureListener
 
 
@@ -23,8 +24,6 @@ class AdvancedGestureDetector(context: Context, view: View, listener: GestureLis
         gestureDetectorCompat =
             GestureDetectorCompat(context, object : GestureDetector.SimpleOnGestureListener() {
                 override fun onDown(e: MotionEvent): Boolean {
-                    val intent = Intent(action)
-                    context.startActivity(intent)
 
                     Log.d("Gesture", "Down!")
                     return listener.onDown(e) // Allow handling down event within listener
@@ -37,6 +36,13 @@ class AdvancedGestureDetector(context: Context, view: View, listener: GestureLis
 
                 override fun onSingleTapUp(e: MotionEvent): Boolean {
                     Log.d("Gesture", "Tap!")
+                    try {
+                        val intent = Intent(action)
+                        context.startActivity(intent)
+                    } catch (Exception: NullPointerException) {
+                        Log.d("Gesture", "No Gesture Assigned")
+
+                    }
                     return listener.onSingleTapUp(e)
                 }
 
