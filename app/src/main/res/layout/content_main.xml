@@ -19,17 +19,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/access"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/requestStatus" />
-
     <Button
         android:id="@+id/requestStatus"
         android:layout_width="wrap_content"
@@ -41,25 +30,56 @@
         app:layout_constraintTop_toBottomOf="@+id/recents" />
 
     <Button
-        android:id="@+id/recentsAppButton"
+        android:id="@+id/testAppButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
-        android:text="recentsAppButton"
+        android:layout_marginTop="50dp"
+        android:text="Test"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/access" />
+        app:layout_constraintTop_toBottomOf="@+id/set2" />
 
     <Button
         android:id="@+id/navigation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="100dp"
         android:scaleX="3"
         android:scaleY="3"
         android:text="navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recentsAppButton" />
+        app:layout_constraintTop_toBottomOf="@+id/testAppButton" />
+
+    <Button
+        android:id="@+id/set1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:text="Set1"
+        app:layout_constraintBaseline_toBaselineOf="@+id/set2"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/set2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="24dp"
+        android:text="Set2"
+        app:layout_constraintEnd_toStartOf="@+id/set3"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toEndOf="@+id/set1"
+        app:layout_constraintTop_toBottomOf="@+id/requestStatus" />
+
+    <Button
+        android:id="@+id/set3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:text="Set3"
+        app:layout_constraintBaseline_toBaselineOf="@+id/set2"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,22 +1,15 @@
 package com.example.betternavigation
 
-import android.content.Context
-import android.accessibilityservice.AccessibilityService
 import android.annotation.SuppressLint
-import android.app.usage.UsageEvents.Event
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
-import android.text.TextUtils
+import android.provider.MediaStore
 import android.util.Log
 import android.view.MotionEvent
-import android.view.accessibility.AccessibilityEvent
 import android.widget.Button
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.coroutines.selects.select
 
 
 // Problem with crashing seems to be todo with calling the functions from the wrong spot or time
@@ -29,6 +22,8 @@ import kotlinx.coroutines.selects.select
 
 private const val DEBUG_TAG = "Gestures"
 
+private const val INTENT_HOME = Intent.ACTION_MAIN
+private val INTENT_CAMERA = MediaStore.ACTION_IMAGE_CAPTURE
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,16 +33,36 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
+
         setContentView(R.layout.content_main)
         val recents = findViewById<Button>(R.id.recents)
-        val recentsAppButton = findViewById<Button>(R.id.recentsAppButton)
+        val testAppButton = findViewById<Button>(R.id.testAppButton)
 //        val accessibilityNav = MyAccessibilityService()
         val requestStatus = findViewById<Button>(R.id.requestStatus)
         val navigation = findViewById<Button>(R.id.navigation)
 
-        //The listerner for the button: ID = navigation
+        val set1 = findViewById<Button>(R.id.set1)
+        val set2 = findViewById<Button>(R.id.set2)
+        val set3 = findViewById<Button>(R.id.set3)
         var navGestureDetector = AdvancedGestureDetector(this, navigation, GestureListener())
+        //The listerner for the button: ID = navigation
+        set1.setOnClickListener {
+            navGestureDetector.setAction(INTENT_CAMERA)
+            Log.d(DEBUG_TAG, "Button 1")
+            true
+        }
 
+        set2.setOnClickListener {
+            navGestureDetector.setAction(INTENT_HOME)
+            Log.d(DEBUG_TAG, "Button 2")
+            true
+        }
+        set3.setOnClickListener {
+            navGestureDetector.setAction(Intent.ACTION_MANAGE_NETWORK_USAGE)
+            Log.d(DEBUG_TAG, "Button 3")
+            true
+        }
 //        val accessibilityIntent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
 //        startActivity(accessibilityIntent)
 
@@ -101,28 +116,25 @@ class MainActivity : AppCompatActivity() {
 //                    requestStatus.text = "disabled"
 //                }
 //            }
-        recentsAppButton.setOnClickListener {
-            val Recentapps = Intent(Intent.ACTION_MAIN).apply {
-                addCategory(Intent.CATEGORY_HOME)
-            }
-            startActivity(Recentapps)
+        testAppButton.setOnClickListener {
+            val testButton = Intent(Intent.ACTION_MAIN)
+            startActivity(testButton)
+        }
 
-
-            recents.setOnClickListener {
+        recents.setOnClickListener {
 //            accessibilityNav.perfAction(3)
 
 
-                val recentsIntent = Intent(Intent.ACTION_MAIN).apply {
-                    addCategory(Intent.CATEGORY_HOME)
-                }
+            val recentsIntent = Intent(Intent.ACTION_MAIN).apply {
+                addCategory(Intent.CATEGORY_HOME)
+            }
 
-                startActivity(recentsIntent)
+            startActivity(recentsIntent)
 
 
             }
 
 
-        }
     }
 
 

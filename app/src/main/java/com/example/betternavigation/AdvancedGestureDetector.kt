@@ -2,10 +2,12 @@ package com.example.betternavigation
 
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.GestureDetectorCompat
 
 
@@ -13,12 +15,17 @@ class AdvancedGestureDetector(context: Context, view: View, listener: GestureLis
 
     private val gestureDetectorCompat: GestureDetectorCompat
     private val view: View
+    private lateinit var action: String
     val listener: GestureListener
+
 
     init {
         gestureDetectorCompat =
             GestureDetectorCompat(context, object : GestureDetector.SimpleOnGestureListener() {
                 override fun onDown(e: MotionEvent): Boolean {
+                    val intent = Intent(action)
+                    context.startActivity(intent)
+
                     Log.d("Gesture", "Down!")
                     return listener.onDown(e) // Allow handling down event within listener
                 }
@@ -71,6 +78,16 @@ class AdvancedGestureDetector(context: Context, view: View, listener: GestureLis
         view.setOnTouchListener { _, event ->
             gestureDetectorCompat.onTouchEvent(event)
         }
+    }
+
+    fun setAction(intent: String) {
+        action = intent
+        Log.d("Action", "action = $intent")
+    }
+
+    fun setAction(intent: Intent) {
+        action = intent.toString()
+        Log.d("Action", "action = $intent")
     }
 
 
