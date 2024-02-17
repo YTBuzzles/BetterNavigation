@@ -63,6 +63,8 @@ class MainActivity : AppCompatActivity() {
             Log.d(DEBUG_TAG, "Button 3")
             true
         }
+
+
 //        val accessibilityIntent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
 //        startActivity(accessibilityIntent)
 
@@ -117,8 +119,8 @@ class MainActivity : AppCompatActivity() {
 //                }
 //            }
         testAppButton.setOnClickListener {
-            val testButton = Intent(Intent.ACTION_MAIN)
-            startActivity(testButton)
+            setContentView(R.layout.content_settings)
+//            startActivity(testButton)
         }
 
         recents.setOnClickListener {

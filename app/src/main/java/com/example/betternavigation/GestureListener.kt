@@ -29,9 +29,9 @@ class GestureListener : AdvancedGestureDetector.GestureListener {
                 } else if (velocityX < -1000) {
                         // Fling left, go to previous page
                         Log.d("Gesture", "Fling left detected!")
-                        // Your navigation logic here
-                } else if (velocityY > 1000) {
-                        // Fling left, go to previous page
+
+                        // Fling left, go to previo// Your navigation logic here
+                        //                } else if (velocityY > 1000) {us page
                         Log.d("Gesture", "Fling down detected!")
                         // Your navigation logic here
                 } else if (velocityY < -1000) {
@@ -42,6 +42,5 @@ class GestureListener : AdvancedGestureDetector.GestureListener {
                 count++
                 return true // Consume the event
         }
-
         // Implement other desired gesture methods similarly
 }

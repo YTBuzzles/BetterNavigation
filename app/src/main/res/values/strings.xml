@@ -45,4 +45,5 @@
     </string>
     <string name="accessibility_service_label">BetterNavigation</string>
     <string name="accessibility_service_description">BetterNavigation\n</string>
+    <string name="action_options">"Options "</string>
 </resources>
