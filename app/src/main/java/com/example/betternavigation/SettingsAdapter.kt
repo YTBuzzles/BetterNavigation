@@ -10,40 +10,15 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 
-class SettingsAdapter() : BaseAdapter(), Parcelable {
-    lateinit var context: Context
-    lateinit var listText: Array<String>
-    lateinit var listImages: Array<Int>
-    lateinit var inflater: LayoutInflater
-
-    constructor(cxt: Context, settingsText: Array<String>, images: Array<Int>) : this() {
-        context = cxt
-        listText = settingsText
-        listImages = images
-        inflater = LayoutInflater.from(cxt)
-    }
-
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<SettingsAdapter> {
-        override fun createFromParcel(parcel: Parcel): SettingsAdapter {
-            return SettingsAdapter(parcel)
-        }
-
-        override fun newArray(size: Int): Array<SettingsAdapter?> {
-            return arrayOfNulls(size)
-        }
-    }
+class SettingsAdapter(cxt: Context, settingsText: Array<String>, images: Array<Int>) :
+    BaseAdapter() {
+    var context = cxt
+    var listText = settingsText
+    var listImages = images
+    var inflater = LayoutInflater.from(cxt)
 
     override fun getCount(): Int {
-        return 3
+        return listText.size
     }
 
     override fun getItem(p0: Int): Any {
@@ -51,13 +26,15 @@ class SettingsAdapter() : BaseAdapter(), Parcelable {
     }
 
     override fun getItemId(p0: Int): Long {
-        var intg: Int 9
         TODO("Not yet implemented")
     }
 
     override fun getView(position: Int, view: View, parent: ViewGroup): View {
-        var convertView = inflater.inflate(R.layout.activity_settings_view, null)
-        var txtView: TextView = convertView.findViewById(R.activity_settings_view, null)
-        var imageView: ImageView =
+        var convertView = inflater.inflate(R.layout.activity_settings_list_view, null)
+        var txtView: TextView = convertView.findViewById(R.id.textView)
+        var imageView: ImageView = convertView.findViewById(R.id.imageIcon)
+        txtView.setText(listText[position])
+        imageView.setImageResource(listImages[position])
+        return convertView
     }
 }

@@ -6,15 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".SettingsListView">
 
+
     <ImageView
+        android:id="@+id/imageIcon"
         android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/imageIcon" />
+        android:layout_height="100dp" />
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"
         android:layout_gravity="center"
         android:text="My Text" />
 

@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         var navGestureDetector = AdvancedGestureDetector(this, navigation, GestureListener())
         //The listerner for the button: ID = navigation
         set1.setOnClickListener {
-            navGestureDetector.setAction(INTENT_CAMERA)
+            setContentView(R.layout.content_settings)
             Log.d(DEBUG_TAG, "Button 1")
             true
         }
