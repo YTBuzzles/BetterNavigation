@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import java.security.AccessControlContext
 
 class SettingsAdapter(cxt: Context, settingsText: Array<String>, images: Array<Int>) :
     BaseAdapter() {

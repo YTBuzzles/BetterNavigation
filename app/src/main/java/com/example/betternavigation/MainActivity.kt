@@ -12,12 +12,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 
 
-// Problem with crashing seems to be todo with calling the functions from the wrong spot or time
-// try to find a way to not do it in onCreate I guess? https://stackoverflow.com/questions/39532507/attempt-to-invoke-virtual-method-java-lang-object-android-content-context-getsy
-// this website is where that thought came from
 
-//I got it working i think just need to add debugging to test it
-//can u show me how to use the Log thing i havent worked it out
 
 
 private const val DEBUG_TAG = "Gestures"
