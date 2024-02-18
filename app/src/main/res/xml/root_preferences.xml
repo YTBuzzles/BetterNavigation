@@ -1,0 +1,55 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:title="@string/messages_header"
+        app:icon="@drawable/baseline_add_comment_24">
+
+        <EditTextPreference
+            app:key="signature"
+            app:title="@string/signature_title"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            app:defaultValue="reply"
+            app:entries="@array/reply_entries"
+            app:entryValues="@array/reply_values"
+            app:key="reply"
+            app:title="@string/reply_title"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/sync_header">
+
+        <SwitchPreferenceCompat
+            app:key="sync"
+            app:title="@string/sync_title" />
+
+        <SwitchPreferenceCompat
+            app:dependency="sync"
+            app:key="attachment"
+            app:summaryOff="@string/attachment_summary_off"
+            app:summaryOn="@string/attachment_summary_on"
+            app:title="@string/attachment_title" />
+
+    </PreferenceCategory>
+    <PreferenceCategory
+        app:icon="@drawable/baseline_add_location_24"
+        app:title="Get Location">
+
+        <SeekBarPreference
+            app:key="volume_notification"
+            app:title="Volume"
+            app:showSeekBarValue="true"
+            app:defaultValue="50" />
+        <SwitchPreferenceCompat
+            app:key="notification"
+            app:title="Disable Notifications"
+            app:summaryOn="You will recieve notifications"
+            app:summaryOff="You will not recieve notifiations"
+            app:defaultValue="true" />
+
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
