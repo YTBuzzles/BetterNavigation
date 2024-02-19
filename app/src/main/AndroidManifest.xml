@@ -12,10 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BetterNavigation"
         tools:targetApi="31">
-        <activity
-            android:name=".SettingsListView"
-            android:exported="false" />
-        <activity
+
+    <activity
             android:name=".MainActivity"
             android:configChanges="orientation"
             android:exported="true"
