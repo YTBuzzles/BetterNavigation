@@ -17,7 +17,8 @@ import androidx.preference.PreferenceManager
 class HomeFragment : Fragment() {
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
@@ -26,30 +27,31 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        fab_settings.setOnClickListener {
 
-            findNavController().navigate(R.id.action_homeFragment_to_settingsFragment)
-        }
-        settings()
+//        fab_settings.setOnClickListener {
+
+        findNavController().navigate(R.id.homeFragment)
+    }
+//        settings()
     }
 
 
     private fun settings() {
-        val sp = PreferenceManager.getDefaultSharedPreferences(context)
+//        val sp = PreferenceManager.getDefaultSharedPreferences(context)
 
-        val signature = sp.getString("signature", "")
-        val defaultReplyAction = sp.getString("reply", "")
-        val sync = sp.getBoolean("sync", true)
-        val notifications = sp.getBoolean("notifications", true)
-        val volume = sp.getInt("volume_notifications", 0)
+//        val signature = sp.getString("signature", "")
+//        val defaultReplyAction = sp.getString("reply", "")
+//        val sync = sp.getBoolean("sync", true)
+//        val notifications = sp.getBoolean("notifications", true)
+//        val volume = sp.getInt("volume_notifications", 0)
+//
 
-
-        tv_signature.text = "Signature: $signature"
-        tv_reply.text = "Default reply: $defaultReplyAction"
-        tv_sync.text = "Sync: $sync"
-        tv_notifications.text = "Disable notifications: $notifications"
-
-        pb_volume.setProgress(volume, true)
+//        tv_signature.text = "Signature: $signature"
+//        tv_reply.text = "Default reply: $defaultReplyAction"
+//        tv_sync.text = "Sync: $sync"
+//        tv_notifications.text = "Disable notifications: $notifications"
+//
+//        pb_volume.setProgress(volume, true)
 
     }
 

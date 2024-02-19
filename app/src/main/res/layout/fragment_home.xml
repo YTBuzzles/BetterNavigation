@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/fragment_home"
-    tools:context=".HomeFragment">
+    tools:context=".HomeFragment"
+    tools:viewBindingIgnore="false">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_settings"
