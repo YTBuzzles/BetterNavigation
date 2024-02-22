@@ -1,18 +1,12 @@
 package com.example.betternavigation
 
 import android.accessibilityservice.AccessibilityService
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.accessibility.AccessibilityEvent
-import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
-import androidx.preference.Preference
 import com.example.betternavigation.databinding.ActivityMainBinding
 
 lateinit var binding: ActivityMainBinding
@@ -60,6 +54,14 @@ class MyAccessibilityService : AccessibilityService() {
                 performGlobalAction(8)
             }
         }
+
+//        if (event?.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
+//            // Handle overlay creation here
+//            // Example: Show a transparent overlay
+//            val overlayIntent = Intent(applicationContext, OverlayActivity::class.java)
+//            overlayIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//            startActivity(overlayIntent)
+//        }
     }
 
     override fun onInterrupt() {
@@ -71,5 +73,9 @@ class MyAccessibilityService : AccessibilityService() {
     override fun onServiceConnected() {
         super.onServiceConnected()
         Log.d("Accessibility Service", "onServiceConnected:")
+
+        val overlayIntent = Intent(applicationContext, OverlayActivity::class.java)
+        overlayIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(overlayIntent)
     }
 }
