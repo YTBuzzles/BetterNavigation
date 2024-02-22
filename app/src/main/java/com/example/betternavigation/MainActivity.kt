@@ -26,7 +26,10 @@ class MainActivity : AppCompatActivity() {
             val intent: Intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
             startActivity(intent)
         }
+
+
     }
+
 
 //    override fun onSupportNavigateUp(): Boolean {
 //        val navController = findNavController(R.id.fragment_main)

@@ -2,7 +2,6 @@
 <resources>
 
     <style name="OverlayTheme" parent="Theme.AppCompat.NoActionBar">
-
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowNoTitle">true</item>

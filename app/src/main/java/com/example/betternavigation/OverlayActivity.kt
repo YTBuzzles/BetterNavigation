@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.util.AttributeSet
 import android.view.MotionEvent
+import android.view.WindowManager
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 
@@ -13,6 +14,9 @@ class OverlayActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_overlay)
+        window.setType(
+            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
+        )
 
         val overlayLayout = findViewById<OverlayFrameLayout>(R.id.overlayLayout)
         overlayLayout.setOnTouchListener { _, event ->
