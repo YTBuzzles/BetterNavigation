@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.betternavigation.OverlayFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/overlayLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+    <!-- Add your UI elements or regions within this FrameLayout -->
+
+    <Button
+        android:id="@+id/overlayNav"
+        android:layout_width="36dp"
+        android:layout_height="match_parent"
+        android:text="@string/overlayNav" />
+</com.example.betternavigation.OverlayFrameLayout>
