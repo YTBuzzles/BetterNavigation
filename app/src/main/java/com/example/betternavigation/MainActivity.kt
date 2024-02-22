@@ -2,6 +2,8 @@ package com.example.betternavigation
 
 import android.accessibilityservice.AccessibilityService
 import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
@@ -27,8 +29,17 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
+        if (!Settings.canDrawOverlays(this)) {
+            val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                Uri.parse("package:$packageName"))
+            startActivity(intent)
+        } else {
+            // Permission already granted, proceed with your overlay logic
+            return
+        }
     }
+
+
 
 
 //    override fun onSupportNavigateUp(): Boolean {
