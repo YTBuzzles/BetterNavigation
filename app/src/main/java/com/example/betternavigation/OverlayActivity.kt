@@ -3,7 +3,6 @@ package com.example.betternavigation
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.widget.FrameLayout
