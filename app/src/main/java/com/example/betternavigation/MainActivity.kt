@@ -1,19 +1,16 @@
 package com.example.betternavigation
 
 import android.accessibilityservice.AccessibilityService
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.accessibility.AccessibilityEvent
-import androidx.annotation.RequiresApi
+import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
-import androidx.preference.Preference
 import com.example.betternavigation.databinding.ActivityMainBinding
+
 
 lateinit var binding: ActivityMainBinding
 lateinit var toolbar: Toolbar
@@ -25,6 +22,11 @@ class MainActivity : AppCompatActivity() {
 //        val navController = findNavController(binding)
 //        val appBarConfiguration = AppBarConfiguration(navController.graph)
 //        findViewById<Toolbar>(R.id.action_settings).setupWithNavController(navController, appBarConfiguration)
+        val accessibilitySettings = findViewById<Button>(R.id.accessibility)
+        accessibilitySettings.setOnClickListener() {
+            val intent: Intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
+            startActivity(intent)
+        }
     }
 
 //    override fun onSupportNavigateUp(): Boolean {
