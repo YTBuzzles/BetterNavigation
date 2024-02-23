@@ -11,6 +11,7 @@ import android.view.accessibility.AccessibilityEvent
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import com.example.betternavigation.databinding.ActivityMainBinding
 
 lateinit var binding: ActivityMainBinding
@@ -95,8 +96,9 @@ class MyAccessibilityService : AccessibilityService() {
         super.onServiceConnected()
         Log.d("Accessibility Service", "onServiceConnected:")
 
-        val overlayIntent = Intent(applicationContext, OverlayActivity::class.java)
-        overlayIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(overlayIntent)
+        val overlayIntent = Intent(applicationContext, OverlayService::class.java)
+//        overlayIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        ContextCompat.startForegroundService(applicationContext, overlayIntent)
+//        startService(overlayIntent)
     }
 }

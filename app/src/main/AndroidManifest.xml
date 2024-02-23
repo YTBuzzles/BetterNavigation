@@ -13,31 +13,24 @@
         android:theme="@style/Theme.BetterNavigation"
         tools:targetApi="31">
 
-    <activity
-        android:name=".MainActivity"
-        android:configChanges="orientation"
-        android:exported="true"
-        android:screenOrientation="fullSensor">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
-
         <activity
-            android:name=".OverlayActivity"
-            android:theme="@style/OverlayTheme"
+            android:name=".MainActivity"
             android:configChanges="orientation"
             android:exported="true"
             android:screenOrientation="fullSensor">
-
-        <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".OverlayService"
+            android:configChanges="orientation"
+            android:exported="false"
+            android:screenOrientation="fullSensor">
+        </service>
 
         <service
             android:name=".MyAccessibilityService"
