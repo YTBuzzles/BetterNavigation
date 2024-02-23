@@ -17,7 +17,6 @@ import android.view.WindowManager
 import android.widget.FrameLayout
 import androidx.annotation.RequiresApi
 
-
 class OverlayService : Service() {
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -31,10 +30,8 @@ class OverlayService : Service() {
 
         // Set the overlay layout parameters
         val params = WindowManager.LayoutParams(
-//            WindowManager.LayoutParams.MATCH_PARENT,
-//            WindowManager.LayoutParams.MATCH_PARENT,
-            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-            WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.MATCH_PARENT,
             PixelFormat.TRANSLUCENT
         )
 
@@ -44,24 +41,24 @@ class OverlayService : Service() {
         windowManager.addView(overlayLayout, params)
 
         // Set the touch event listener for the overlay
-//        overlayLayout.setOnTouchListener { _, event ->
-//            // Handle touch events here
-//            val x = event.x
-//            val y = event.y
-//
-//            // Determine which region was clicked
-//            if (isClickInClickableRegion(x, y)) {
-//                // Handle clicks for the clickable region
-//                // Perform actions or pass through to the underlying app
-//                // ...
-//            } else {
-//                // Handle clicks for the non-clickable region
-//                // ...
-//            }
-//
-//            // Return true to consume the event
-//            true
-//        }
+        overlayLayout.setOnTouchListener { _, event ->
+            // Handle touch events here
+            val x = event.x
+            val y = event.y
+
+            // Determine which region was clicked
+            if (isClickInClickableRegion(x, y)) {
+                // Handle clicks for the clickable region
+                // Perform actions or pass through to the underlying app
+                // ...
+            } else {
+                // Handle clicks for the non-clickable region
+                // ...
+            }
+
+            // Return true to consume the event
+            false
+        }
     }
 
     private fun isClickInClickableRegion(x: Float, y: Float): Boolean {
@@ -105,53 +102,6 @@ class OverlayService : Service() {
 
 }
 
-
-
-
-
-//class OverlayActivity : AppCompatActivity() {
-//    @RequiresApi(Build.VERSION_CODES.O)
-//    @SuppressLint("ClickableViewAccessibility")
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_overlay)
-//        window.setType(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY)
-//
-//        val overlayLayout = findViewById<OverlayFrameLayout>(R.id.overlayLayout)
-//        overlayLayout.setOnTouchListener { _, event ->
-//            // Handle touch events here
-//            val x = event.x
-//            val y = event.y
-//
-//            // Determine which region was clicked (you can customize this logic)
-//            if (isClickInClickableRegion(x, y)) {
-//                // Handle clicks for the clickable region
-//                // Perform actions or pass through to the underlying app
-//                // ...
-//            } else {
-//                // Handle clicks for the non-clickable region
-//                // ...
-//            }
-//
-//            // Return true to consume the event
-//            true
-//        }
-//    }
-//
-//
-//    private fun isClickInClickableRegion(x: Float, y: Float): Boolean {
-//        // Implement logic to determine if the click is in the clickable region
-//        // You might want to define specific coordinates or areas
-//        // For example, check if x is in a certain range or if y is in a specific area
-//        // Return true if it's in the clickable region, false otherwise
-//        // ...
-//        return false
-//    }
-//
-//    override fun onDestroy() {
-//        super.onDestroy()
-//    }
-//}
 
 class OverlayFrameLayout(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
 
