@@ -25,12 +25,27 @@
             </intent-filter>
         </activity>
 
+
         <service
             android:name=".OverlayService"
-            android:configChanges="orientation"
-            android:exported="false"
-            android:screenOrientation="fullSensor">
+            android:label="@string/service_name"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_service_config" />
         </service>
+
+
+        <!--        <service-->
+<!--            android:name=".OverlayService"-->
+<!--            android:configChanges="orientation"-->
+<!--            android:exported="true"-->
+<!--            android:screenOrientation="fullSensor">-->
+<!--        </service>-->
 
         <service
             android:name=".MyAccessibilityService"
