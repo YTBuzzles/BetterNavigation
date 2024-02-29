@@ -56,24 +56,37 @@ class MyAccessibilityService : AccessibilityService() {
         Log.d("AccessibilityService", "Received event: $event")
 
         if (event?.eventType == AccessibilityEvent.TYPE_VIEW_CLICKED) {
-            val txt = event.text[0]
-
-            if (txt == "screenshot") {
-                performGlobalAction(9)
-            } else if (txt == "back") {
-                performGlobalAction(1)
-            } else if (txt == "recents") {
-                performGlobalAction(3)
-            } else if (txt == "home") {
-                performGlobalAction(2)
-            } else if (txt == "notifications") {
-                performGlobalAction(4)
-            } else if (txt == "quicksettings") {
-                performGlobalAction(5)
-            } else if (txt == "power") {
-                performGlobalAction(6)
-            } else if (txt == "lockscreen") {
-                performGlobalAction(8)
+            when (event.text[0]) {
+                "screenshot" -> {
+                    performGlobalAction(9)
+                }
+                "RECENT" -> {
+                    performGlobalAction(3)
+                }
+                "BACK" -> {
+                    performGlobalAction(1)
+                }
+                "back" -> {
+                    performGlobalAction(1)
+                }
+                "recents" -> {
+                    performGlobalAction(3)
+                }
+                "home" -> {
+                    performGlobalAction(2)
+                }
+                "notifications" -> {
+                    performGlobalAction(4)
+                }
+                "quicksettings" -> {
+                    performGlobalAction(5)
+                }
+                "power" -> {
+                    performGlobalAction(6)
+                }
+                "lockscreen" -> {
+                    performGlobalAction(8)
+                }
             }
         }
 

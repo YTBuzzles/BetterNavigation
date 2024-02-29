@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.betternavigation.OverlayFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/overlayLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clickable="true"
     android:theme="@style/OverlayTheme">
-    <!--    android:background="@android:color/transparent">-->
 
+    <Button
+        android:id="@+id/sidebar"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:text="recent" />
 
-    <!-- Add your UI elements or regions within this FrameLayout -->
-
-<!--    <Button-->
-<!--        android:id="@+id/overlayNav"-->
-<!--        android:layout_width="36dp"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:text="@string/overlayNav" />-->
-</com.example.betternavigation.OverlayFrameLayout>
+    <Button
+        android:id="@+id/sidebarbottom"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:layout_marginTop="360dp"
+        android:text="back" />
+</FrameLayout>

@@ -8,7 +8,9 @@ import android.graphics.PixelFormat
 import android.os.Build
 import android.os.IBinder
 import android.util.AttributeSet
+import android.util.DisplayMetrics
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -27,20 +29,38 @@ class OverlayService : Service() {
 
         // Set up the overlay layout
         val overlayLayout = LayoutInflater.from(applicationContext)
-            .inflate(R.layout.activity_overlay, null) as OverlayFrameLayout
+            .inflate(R.layout.activity_overlay, null)
+
+
+        // calculate screen width
+        val displayMetrics = DisplayMetrics()
+        val windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val display = windowManager.currentWindowMetrics.bounds
+            displayMetrics.widthPixels = display.width()
+        } else {
+            @Suppress("DEPRECATION")
+            windowManager.defaultDisplay.getMetrics(displayMetrics)
+        }
+
+        val screenWidth = displayMetrics.widthPixels
+        val barWidth = 90
+
 
         // Set the overlay layout parameters
         val params = WindowManager.LayoutParams(
-//            WindowManager.LayoutParams.MATCH_PARENT,
-//            WindowManager.LayoutParams.MATCH_PARENT,
+            barWidth,  // width
+            WindowManager.LayoutParams.MATCH_PARENT,  // height
+            (screenWidth/2) - (barWidth/2), // x pos start
+            0, // y pos start
             WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-            WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,
-            PixelFormat.TRANSLUCENT
+            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+            PixelFormat.TRANSPARENT,
         )
 
 
         // Add the overlay layout to the window
-        val windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
         windowManager.addView(overlayLayout, params)
 
         // Set the touch event listener for the overlay
@@ -84,23 +104,6 @@ class OverlayService : Service() {
 
     override fun onBind(intent: Intent?): IBinder? {
         return null
-    }
-
-    fun viewHierarchyToString(view: View): String {
-        val stringBuilder = StringBuilder()
-        traverseViewHierarchy(view, stringBuilder, 0)
-        return stringBuilder.toString()
-    }
-
-    private fun traverseViewHierarchy(view: View, stringBuilder: StringBuilder, depth: Int) {
-        val padding = "  ".repeat(depth)
-        stringBuilder.append("$padding${view.javaClass.simpleName}\n")
-
-        if (view is ViewGroup) {
-            for (i in 0 until view.childCount) {
-                traverseViewHierarchy(view.getChildAt(i), stringBuilder, depth + 1)
-            }
-        }
     }
 
 }
