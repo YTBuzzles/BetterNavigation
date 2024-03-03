@@ -21,8 +21,7 @@ class OverlayService : AccessibilityService() {
     override fun onServiceConnected() {
         super.onServiceConnected()
 
-        val windowManager = applicationContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-
+        val windowManager = this.getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
         // calculate screen width
         val displayMetrics = DisplayMetrics()
@@ -47,9 +46,8 @@ class OverlayService : AccessibilityService() {
             width = barWidth
             height = LayoutParams.MATCH_PARENT
             type = LayoutParams.TYPE_ACCESSIBILITY_OVERLAY
-            gravity = Gravity.START
             format = PixelFormat.TRANSPARENT
-            flags = LayoutParams.FLAG_NOT_TOUCHABLE
+            flags = LayoutParams.FLAG_NOT_FOCUSABLE
         }
 
         // Set up the overlay layout
@@ -86,6 +84,7 @@ class OverlayService : AccessibilityService() {
 
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
         Log.d("AccessibilityService", "Received event: $event")
+
 
         if (event?.eventType == AccessibilityEvent.TYPE_VIEW_CLICKED) {
             when (event.text[0]) {
