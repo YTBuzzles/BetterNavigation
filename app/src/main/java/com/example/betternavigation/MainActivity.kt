@@ -4,6 +4,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
+import android.view.accessibility.AccessibilityEvent
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -16,6 +18,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val sidebar = findViewById<Button>(R.id.sidebar)
+        var navGestureDetector = AdvancedGestureDetector(this, sidebar, GestureListener())
+        sidebar.setOnClickListener {
+            navGestureDetector
+            Log.d("TEST 1000", "Button 3")
+            true
+        }
 //        val navController = findNavController(binding)
 //        val appBarConfiguration = AppBarConfiguration(navController.graph)
 //        findViewById<Toolbar>(R.id.action_settings).setupWithNavController(navController, appBarConfiguration)
@@ -27,12 +37,20 @@ class MainActivity : AppCompatActivity() {
 
         // make sure app has appear on top permissions
         if (!Settings.canDrawOverlays(this)) {
-            val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                Uri.parse("package:$packageName"))
+            val intent = Intent(
+                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                Uri.parse("package:$packageName")
+            )
             startActivity(intent)
         } else {
             // Permission already granted, proceed with your overlay logic
             return
+        }
+
+        fun OnTiddies(event: String) {
+            val event = AccessibilityEvent(AccessibilityEvent.TYPE_VIEW_CLICKED)
+            dispatchPopulateAccessibilityEvent(event)
+
         }
 
 //        // Check if the WRITE_SETTINGS permission is granted

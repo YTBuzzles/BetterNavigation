@@ -36,8 +36,11 @@ class MainActivityArchive : AppCompatActivity() {
         val set1 = findViewById<Button>(R.id.set1)
         val set2 = findViewById<Button>(R.id.set2)
         val set3 = findViewById<Button>(R.id.set3)
+
         var navGestureDetector = AdvancedGestureDetector(this, navigation, GestureListener())
         //The listerner for the button: ID = navigation
+
+
         set1.setOnClickListener {
             setContentView(R.layout.fragment_home)
             //val navController = findNavController(R.id.homeFragment)

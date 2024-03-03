@@ -10,6 +10,8 @@ import android.view.View
 import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.GestureDetectorCompat
 import java.lang.NullPointerException
+import android.app.Activity
+import android.view.accessibility.AccessibilityEvent
 
 
 class AdvancedGestureDetector(context: Context, view: View, listener: GestureListener) {
@@ -26,6 +28,10 @@ class AdvancedGestureDetector(context: Context, view: View, listener: GestureLis
                 override fun onDown(e: MotionEvent): Boolean {
 
                     Log.d("Gesture", "Down!")
+                    val intent = Intent(OverlayService.ACTION_DETECTED)
+                    intent.putExtra(OverlayService.ACTION_DIRECTION, "RIGHT")
+                    context.sendBroadcast(intent)
+
                     return listener.onDown(e) // Allow handling down event within listener
                 }
 
@@ -36,6 +42,8 @@ class AdvancedGestureDetector(context: Context, view: View, listener: GestureLis
 
                 override fun onSingleTapUp(e: MotionEvent): Boolean {
                     Log.d("Gesture", "Tap!")
+
+
                     try {
                         val intent = Intent(action)
                         context.startActivity(intent)

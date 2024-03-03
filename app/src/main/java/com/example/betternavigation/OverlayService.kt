@@ -1,17 +1,21 @@
 package com.example.betternavigation
 
+import android.accessibilityservice.AccessibilityGestureEvent
 import android.accessibilityservice.AccessibilityService
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.Configuration
 import android.graphics.PixelFormat
 import android.os.Build
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.View
 import android.view.WindowManager
 import android.view.WindowManager.LayoutParams
 import android.view.accessibility.AccessibilityEvent
+import android.widget.Button
 import androidx.annotation.RequiresApi
 
 class OverlayService : AccessibilityService() {
@@ -85,45 +89,25 @@ class OverlayService : AccessibilityService() {
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
         Log.d("AccessibilityService", "Received event: $event")
 
+        if (event?.eventType == AccessibilityEvent.TYPE_GESTURE_DETECTION_START)
 
-        if (event?.eventType == AccessibilityEvent.TYPE_VIEW_CLICKED) {
-            when (event.text[0]) {
-                "screenshot" -> {
-                    performGlobalAction(9)
-                }
-                "RECENTSCREEN" -> {
-                    performGlobalAction(3)
-                }
-                "BACKBTN" -> {
-                    performGlobalAction(1)
-                }
-                "back" -> {
-                    performGlobalAction(1)
-                }
-                "recents" -> {
-                    performGlobalAction(3)
-                }
-                "home" -> {
-                    performGlobalAction(2)
-                }
-                "notifications" -> {
-                    performGlobalAction(4)
-                }
-                "quicksettings" -> {
-                    performGlobalAction(5)
-                }
-                "power" -> {
-                    performGlobalAction(6)
-                }
-                "lockscreen" -> {
-                    performGlobalAction(8)
+
+            if (event?.eventType == AccessibilityEvent.TYPE_VIEW_CLICKED) {
+                when (event.text[0]) {
+                    "screenshot" -> {
+                        performGlobalAction(9)
+                    }
                 }
             }
-        }
     }
 
     override fun onInterrupt() {
         TODO("Not yet implemented")
+    }
+
+    companion object {
+        val ACTION_DETECTED: String = "TIDDIES_ACTION_DETECTED"
+        val ACTION_DIRECTION: String = ""
     }
 
 }
