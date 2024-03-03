@@ -78,6 +78,16 @@
         android:text="screenshot" />
 
     <Button
+        android:id="@+id/tiddies"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="150dp"
+        android:layout_marginStart="250dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginBottom="40dp"
+        android:text="tiddies" />
+
+    <Button
         android:id="@+id/back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -1,21 +1,17 @@
 package com.example.betternavigation
 
-import android.accessibilityservice.AccessibilityGestureEvent
 import android.accessibilityservice.AccessibilityService
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.res.Configuration
+import android.content.Intent
 import android.graphics.PixelFormat
 import android.os.Build
 import android.util.DisplayMetrics
 import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
-import android.view.View
 import android.view.WindowManager
 import android.view.WindowManager.LayoutParams
 import android.view.accessibility.AccessibilityEvent
-import android.widget.Button
 import androidx.annotation.RequiresApi
 
 class OverlayService : AccessibilityService() {
@@ -101,8 +97,22 @@ class OverlayService : AccessibilityService() {
             }
     }
 
+    val swipe = GestureReceiver() {
+        fun onReceive(context: Context?, intent: Intent?) {
+            // Handle the broadcast, extract swipe direction
+            val swipeDirection = intent?.getStringExtra(ACTION_DIRECTION)
+
+            // Do something with the swipe direction
+            if (swipeDirection == "TIDDIES_ACTION_DETECTED") {
+                // Perform global action for a right swipe
+                performGlobalAction(GLOBAL_ACTION_BACK)
+            } else {
+                // Perform global action for a left swipe
+                performGlobalAction(GLOBAL_ACTION_HOME)
+            }
+        }
+    }
     override fun onInterrupt() {
-        TODO("Not yet implemented")
     }
 
     companion object {

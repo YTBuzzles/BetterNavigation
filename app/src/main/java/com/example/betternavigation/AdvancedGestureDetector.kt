@@ -42,11 +42,11 @@ class AdvancedGestureDetector(context: Context, view: View, listener: GestureLis
 
                 override fun onSingleTapUp(e: MotionEvent): Boolean {
                     Log.d("Gesture", "Tap!")
-
+                    val intent = Intent(OverlayService.ACTION_DETECTED)
+                    intent.putExtra(OverlayService.ACTION_DIRECTION, "RIGHT")
+                    context.sendBroadcast(intent)
 
                     try {
-                        val intent = Intent(action)
-                        context.startActivity(intent)
                     } catch (Exception: NullPointerException) {
                         Log.d("Gesture", "No Gesture Assigned")
 

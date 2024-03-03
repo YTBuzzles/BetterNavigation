@@ -24,6 +24,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <receiver
+            android:name=".GestureReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.yourapp.CUSTOM_ACTION" />
+            </intent-filter>
+        </receiver>
 
 
         <service

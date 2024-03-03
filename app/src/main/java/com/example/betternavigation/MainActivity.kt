@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val sidebar = findViewById<Button>(R.id.sidebar)
+        val sidebar = findViewById<Button>(R.id.tiddies)
         var navGestureDetector = AdvancedGestureDetector(this, sidebar, GestureListener())
         sidebar.setOnClickListener {
             navGestureDetector
