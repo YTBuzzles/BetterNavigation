@@ -44,7 +44,7 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <string name="accessibility_service_label">BetterNavigation</string>
-    <string name="accessibility_service_description">BetterNavigation\n</string>
+    <string name="accessibility_service_description">Allow this setting so that the\n recents screen, screenshot, etc can be activated</string>
     <string name="action_options">"Options "</string>
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>

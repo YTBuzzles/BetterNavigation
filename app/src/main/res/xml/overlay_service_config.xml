@@ -2,11 +2,11 @@
 
 <accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
     android:accessibilityEventTypes="typeViewClicked"
-    android:accessibilityFeedbackType="feedbackAllMask"
+    android:accessibilityFeedbackType="feedbackGeneric"
     android:accessibilityFlags="flagDefault"
     android:description="@string/accessibility_service_description"
     android:packageNames="com.example.betternavigation"
     android:notificationTimeout="100"
-    android:canRetrieveWindowContent="false"
-    android:settingsActivity="com.example.android.accessibility.ServiceSettingsActivity"
+    android:canPerformGestures="true"
+    android:canRetrieveWindowContent="true"
     />

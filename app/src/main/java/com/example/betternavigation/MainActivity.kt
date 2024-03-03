@@ -1,17 +1,12 @@
 package com.example.betternavigation
 
-import android.accessibilityservice.AccessibilityService
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
-import android.view.accessibility.AccessibilityEvent
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
 import com.example.betternavigation.databinding.ActivityMainBinding
 
 lateinit var binding: ActivityMainBinding
@@ -30,6 +25,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // make sure app has appear on top permissions
         if (!Settings.canDrawOverlays(this)) {
             val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                 Uri.parse("package:$packageName"))
@@ -38,6 +34,16 @@ class MainActivity : AppCompatActivity() {
             // Permission already granted, proceed with your overlay logic
             return
         }
+
+//        // Check if the WRITE_SETTINGS permission is granted
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+//            !Settings.System.canWrite(this)
+//        ) {
+//            // If not granted, request the WRITE_SETTINGS permission
+//            val intent = Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
+//            intent.data = Uri.parse("package:" + this.packageName)
+//            this.startActivity(intent)
+//        }
     }
 
 
@@ -47,71 +53,4 @@ class MainActivity : AppCompatActivity() {
 //        val navController = findNavController(R.id.fragment_main)
 //        return navController.navigateUp() || super.onSupportNavigateUp()
 //    }
-}
-
-
-class MyAccessibilityService : AccessibilityService() {
-
-    override fun onAccessibilityEvent(event: AccessibilityEvent?) {
-        Log.d("AccessibilityService", "Received event: $event")
-
-        if (event?.eventType == AccessibilityEvent.TYPE_VIEW_CLICKED) {
-            when (event.text[0]) {
-                "screenshot" -> {
-                    performGlobalAction(9)
-                }
-                "RECENT" -> {
-                    performGlobalAction(3)
-                }
-                "BACK" -> {
-                    performGlobalAction(1)
-                }
-                "back" -> {
-                    performGlobalAction(1)
-                }
-                "recents" -> {
-                    performGlobalAction(3)
-                }
-                "home" -> {
-                    performGlobalAction(2)
-                }
-                "notifications" -> {
-                    performGlobalAction(4)
-                }
-                "quicksettings" -> {
-                    performGlobalAction(5)
-                }
-                "power" -> {
-                    performGlobalAction(6)
-                }
-                "lockscreen" -> {
-                    performGlobalAction(8)
-                }
-            }
-        }
-
-//        if (event?.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
-//            // Handle overlay creation here
-//            // Example: Show a transparent overlay
-//            val overlayIntent = Intent(applicationContext, OverlayActivity::class.java)
-//            overlayIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-//            startActivity(overlayIntent)
-//        }
-    }
-
-    override fun onInterrupt() {
-        TODO("Not yet implemented")
-        // Handle interruption (if necessary)
-    }
-
-
-    override fun onServiceConnected() {
-        super.onServiceConnected()
-        Log.d("Accessibility Service", "onServiceConnected:")
-
-        val overlayIntent = Intent(applicationContext, OverlayService::class.java)
-//        overlayIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        ContextCompat.startForegroundService(applicationContext, overlayIntent)
-//        startService(overlayIntent)
-    }
 }
